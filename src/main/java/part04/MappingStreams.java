@@ -31,7 +31,18 @@ public class MappingStreams {
      */
     public IntStream doubleValuesInStream(IntStream numbers) {
         // hint: use the map() method to double the values in the stream.
-        return null; // TODO
+        //return null; // TODO
+        //the demand is to return an intStream and we are given an IntStream called
+        //numbers. no conversion needed!
+        //learning how to transform elements inside a stream.
+        //this is useful when we want to double, split the whole stream.
+        //no loop, map!
+        //for example: numbers.map(x -> x*2) is a doubling operation.
+        //this does not change original numbers but creates a new stream pipeline.
+        // x -> x*2 is a lambda expression. sounds cool. lambda.
+        //map() applies to same operation to all stream elements
+        IntStream resultf = numbers.map(x->x*2);
+        return resultf;
     }
 
     /**
@@ -44,7 +55,11 @@ public class MappingStreams {
      */
     public IntStream multiplyValuesInStream(IntStream numbers, int multiplier) {
         // hint: use the map() method to multiply the values in the stream.
-        return null; // TODO
+        //we get two values which are called numbers, and multiplier. first is intstream other is integer
+        //return null; // TODO
+        //wait yeah this is easy, just use multiplier instead of hardcoded
+        IntStream resultf = numbers.map(x->x*multiplier);
+        return resultf;
     }
 
     /**
@@ -58,7 +73,17 @@ public class MappingStreams {
          * hint: First, use the stream() method to create a Stream<Integer>.
          * Then, use mapToInt() method to convert that to an IntStream.
          */
-        return null; // TODO
+        //we get a List<Integer> called numbers
+        //we are demanded to return IntStream and are not in a position
+        //to deny the request. dang..
+        //1. convert
+        //2. worry about the assignment
+        Stream<Integer> responseToDemand = numbers.stream();
+        IntStream finalResponse = responseToDemand.mapToInt(x->x); //lambda cant be empty?
+        //java automatically x->x when maptoint converts Integer into int. this is
+        //unboxing. you could say converting a Stream<Integer> to IntStream is like christmas
+        //return null; // TODO
+        return finalResponse;
     }
 
     /**
@@ -76,7 +101,14 @@ public class MappingStreams {
      */
     public Stream<String> prefixAllStrings(Stream<String> strings, String prefix) {
         // hint: once again, use the map() method to add the prefix
-        return null; // TODO
+        //the lords demand a Stream of String objects. we are given one called strings and then just a string called prefix.
+        //we have to add the ending called prefix at the end of strings i think
+        //so this is useful when we want to add strings
+        //Stream<String> finishedStrings = strings.map(x-> x+prefix);
+        //ah wait prefix..not suffix
+        Stream<String> finishedStrings = strings.map(x-> prefix+x);
+        return finishedStrings;
+        //return null; // TODO
     }
 
     /**
@@ -92,7 +124,11 @@ public class MappingStreams {
      * @return a stream of strings with the suffix added
      */
     public Stream<String> suffixAllStrings(Stream<String> strings, String suffix) {
-        return null; // TODO
+        //return null; // TODO
+        //a horrifying amount of text for a seemingly simple task.
+        //demand is to give Stream<String> with suffix removed? ah wait no add
+        Stream<String> finishedStrings2 = strings.map(x-> x+suffix);
+        return finishedStrings2;
     }
 
     /**
@@ -106,14 +142,34 @@ public class MappingStreams {
      *
      * @param strings a stream of strings
      * @param suffix  the substring to remove from the end of each string
-     * @return a stream of strings with the suffix removed
+     * @return a stream of strings with the suf
+    fix removed
      */
+
+
     public Stream<String> removeSuffix(Stream<String> strings, String suffix) {
         /*
          * hint: If your expression is too complex, you can define a separate method
          * that you call from the lambda expression.
          */
-        return null; // TODO
+
+        //return null; // TODO
+        //now we remove the suffix! cant - strings can we?
+        return strings.map(randomString ->{
+
+                    if(randomString.endsWith(suffix)){
+                        //remove suffix
+                        return randomString.substring(
+                        0,
+                        randomString.length()-suffix.length()
+                        );
+            }else{
+                        //keep original string
+                        return randomString;
+            }
+        });
+        //the code returns only the remaining text without suffix, sinze we put 0, maxvalueoftextwithsuffixlengthremovedfromtotallength)
+
     }
 
     /**
@@ -128,15 +184,22 @@ public class MappingStreams {
      * @return a stream of strings
      */
     public Stream<String> streamFizzBuzz(IntStream numbers) {
-        /*
-         * The FizzBuzz pattern is as follows:
-         * - if the number is divisible by both 3 and 5, the string is "FizzBuzz"
-         * - if the number is divisible by 3, the string is "Fizz"
-         * - if the number is divisible by 5, the string is "Buzz"
-         * - otherwise, the string is the number as a string
-         */
 
-        // hint: see the mapToObj() method in IntStream
-        return null; // TODO
+        return numbers.mapToObj(number -> {
+
+                    if (number % 3 == 0 && number % 5 == 0) {
+                        return "FizzBuzz";
+            }
+
+                    if (number % 3 == 0) {
+                        return "Fizz";
+            }
+
+                    if (number % 5 == 0) {
+                        return "Buzz";
+            }
+
+                    return String.valueOf(number);
+        });
     }
 }
