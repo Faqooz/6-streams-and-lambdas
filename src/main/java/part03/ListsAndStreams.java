@@ -22,7 +22,15 @@ public class ListsAndStreams {
         /*
          * hint: see the documentation of List about how to create a Stream from a List.
          */
-        return null; // TODO
+        //strings.stream(); creates a stream containing elements of a list.
+        //we receive a list of strings and must return stream of strings.
+        //this thing gives us a List<String> called strings and demands, absolutely demands
+        //us to return a Stream<String>. Thus we have no
+        //option but to comply! we have to convert List<String>
+        //to Stream<String>
+        Stream<String> result = strings.stream();
+        return result;
+                //return null; // TODO
     }
 
     /**
@@ -32,7 +40,11 @@ public class ListsAndStreams {
      * @return a List of the same strings
      */
     public List<String> makeList(Stream<String> stream) {
-        return null; // TODO
+        //we are give Stream<String> called stream.
+        //demand is to return a List<String> type.
+        List<String> result = stream.toList();
+        return result;
+        //return null; // TODO
     }
 
     /**
@@ -45,9 +57,14 @@ public class ListsAndStreams {
      * @return a Stream containing at most 'count' strings from the list
      */
     public Stream<String> streamWithLimit(List<String> strings, int count) {
+        
         // TODO: check the documentation of Stream!
         // If you want, you can utilize the 'makeStream()' method you implemented above.
-        return null;
+        Stream<String> x = makeStream(strings);
+        Stream<String> xQ = x.limit(count); //count given in method!
+        return xQ;
+        
+        //return xQ;
     }
 
 }
