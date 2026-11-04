@@ -2,7 +2,7 @@ package part09;
 
 import java.util.List;
 import java.util.stream.Stream;
-
+import java.util.Comparator;
 import pizza.Pizza;
 
 /**
@@ -29,7 +29,8 @@ public class PizzaStreams {
          * You can use the toppings() method of a Pizza to get the toppings as a
          * list of strings.
          */
-        return null; // TODO: implement this method
+         //toopings are essential for a good pizza
+        return pizzas.filter(x->x.toppings().contains("pineapple"));
     }
 
     /**
@@ -43,7 +44,8 @@ public class PizzaStreams {
          * Like the previous method, but this time you must select the pizzas
          * that do not have "pineapple" as a topping.
          */
-        return null; // TODO: implement this method
+        //return null; // TODO: implement this method
+        return pizzas.filter(x->!x.toppings().contains("pineapple"));
     }
 
     /**
@@ -60,8 +62,10 @@ public class PizzaStreams {
          * that have the given topping. You can assume that toppings are
          * always in lower case.
          */
-        return null; // TODO: implement this method
+        //return null; // TODO: implement this method
+        return pizzas.filter(p -> p.toppings().contains(topping));
     }
+    
 
     /**
      * Returns a stream of pizzas that have any of the toppings given as the
@@ -81,7 +85,10 @@ public class PizzaStreams {
          * of the given toppings and then use that method here. You are also allowed to
          * add new methods in the Pizza class.
          */
-        return null; // TODO: implement this method
+        //return null; // TODO: implement this method
+        //we get pizzas and toppings. return pizza object sream
+        //maybe? return pizzas.filter(p -> p.toppings().stream().anyMatch(toppings::contains));
+        return pizzas.filter(p -> p.toppings().stream().anyMatch(toppings::contains));
     }
 
     /**
@@ -93,6 +100,7 @@ public class PizzaStreams {
      * @return a stream of pizzas that is sorted by price in ascending order
      */
     public Stream<Pizza> sortPizzasByPrice(Stream<Pizza> pizzas) {
+        
         /*
          * You must use the sorted() method of the Stream interface to sort
          * the pizzas by price.
@@ -100,7 +108,9 @@ public class PizzaStreams {
          * https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/stream
          * /Stream.html#sorted(java.util.Comparator)
          */
-        return null; // TODO: implement this method
+        //return null; // TODO: implement this method
+        //return pizzas.sorted(Comparator.comparing(Pizza::price));
+        return pizzas.sorted(Comparator.comparing(Pizza::price));
     }
 
     /**
@@ -118,6 +128,8 @@ public class PizzaStreams {
          * compareToIgnoreCase() method of the String class to compare the names of the
          * pizzas.
          */
-        return null; // TODO: implement this method
+        //return null; // TODO: implement this method
+        return pizzas.sorted((p1, p2) -> p1.name().compareToIgnoreCase(p2.name()));
+        //these shorter method implementation tasks are much more fun to do than earlier. feedback loop is faster
     }
 }
